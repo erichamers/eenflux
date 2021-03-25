@@ -1,0 +1,23 @@
+from django.dispatch import receiver
+from django.db.models.signals import post_save, post_delete
+
+from .models import User, Influencer, Business
+
+@receiver(post_save, sender=User)
+def create_user_model_signal(sender, instance, created, **kwargs):
+    print('creating relationship')
+    if created:
+        if instance.user_type == 'IN':
+            Influencer.objects.create(user=instance)
+        elif instance.user_type == 'BZ':
+            Business.objects.create(user=instance)
+            
+@receiver(post_delete, sender=Influencer)
+def delete_influencer_model_signal(sender, instance, using, **kwargs):
+    print('Deleting influencer object')
+    User.objects.delete(user=instance)
+    
+@receiver(post_delete, sender=Business)
+def delete_influencer_model_signal(sender, instance, using, **kwargs):
+    User.objects.delete(user=instance)
+            
