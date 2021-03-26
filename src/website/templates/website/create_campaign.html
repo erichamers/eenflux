@@ -1,17 +1,32 @@
 {% extends 'website/base.html' %}
 
+{% load widget_tweaks %}
 
 {% block content %}
 
-<h1>Create New Campaign</h1>
+<div class="w-50 mx-auto my-5">
 
-<form action="{% url 'website:new-campaign' %}" method="post">
+  <h1>Create New Campaign</h1>
 
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Create">
-  
-</form>
+  <form action="{% url 'website:new-campaign' %}" method="post">
+
+    {% csrf_token %}
+    <div class="form-group my-4">
+      <label for="id_title">Title:</label>
+      {% render_field form.title class="form-control" %}
+    </div>
+    <div class="form-group my-4">
+      <label for="id_description">Description:</label>
+      {% render_field form.description class="form-control" %}
+    </div>
+    <div class="form-group my-4">
+      <label for="id_budget">Budget:</label>
+      {% render_field form.budget class="form-control" %}
+    </div>
+    <input class="btn btn-sm btn-primary" type="submit" value="Create">
+    
+  </form>
+</div>
   
 {% endblock content %}
   

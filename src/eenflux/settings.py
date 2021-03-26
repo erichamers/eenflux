@@ -15,6 +15,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'widget_tweaks',
     'accounts.apps.AccountsConfig',
     'website.apps.WebsiteConfig',
     'django.contrib.admin',

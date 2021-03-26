@@ -8,7 +8,7 @@ def create_user_model_signal(sender, instance, created, **kwargs):
     if created:
         if instance.user_type == 'IN':
             Influencer.objects.create(user=instance)
-        elif instance.user_type == 'BZ':
+        else:
             Business.objects.create(user=instance)
             
 @receiver(post_delete, sender=Influencer)

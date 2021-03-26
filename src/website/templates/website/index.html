@@ -3,43 +3,30 @@
 
 {% block content %}
 
-<h1>Index page</h1>
-<p>This is the index page.</p>
+<div class="w-50 mx-auto">
+  <h1>Index page</h1>
+  <p>This is the index page.</p>
 
-{% if user.is_authenticated %}
+  {% if user.is_authenticated %}
 
-<p>
-  You're logged in as {{ user.get_username }}
-</p>
+  <p>
+    You're logged in as {{ user.get_username }}
+  </p>
 
-<form action="{% url 'accounts:logout' %}" method="post">
-  {% csrf_token %}
-  <input class="btn btn-sm btn-primary" type="submit" value="Logout">
-</form>
-
-{% else %}
-
-<a href="{% url 'accounts:login' %}" class="btn btn-sm btn-primary">Login</a>
-<a href="{% url 'accounts:register' %}" class="btn btn-sm btn-primary">Register</a>
-
-{% endif %}
-
-
-{% if user.is_business %}
-
-<a href="{% url 'website:new-campaign' %}" class="btn btn-sm btn-primary my-2">Create Campaign</a>  
-
-{% endif %}
-
-<div class="campaigns my-5">
-
-  {% for campaign in campaigns %}
-    <div class="campaign my-2">
-      <p><strong>Title:</strong> {{ campaign.title }}</p>
-      <p><strong>Description:</strong> {{ campaign.description }}</p>
-      <p><strong>Budget:</strong> {{ campaign.budget }}</p>
+  {% if user.is_business %}
+    <div class="d-flex flex-row justify-content-center">
+      <a href="{% url 'website:new-campaign' %}" class="btn btn-sm mx-1 btn-primary">Create Campaign</a>  
+  {% endif %}
+      <a href="{% url 'accounts:logout' %}" class="btn btn-sm mx-1 btn-primary">Logout</a>
     </div>
-  {% endfor %}  
+  {% else %}
+
+  <div class="d-flex flex-row justify-content-center">
+      <a href="{% url 'accounts:login' %}" class="btn btn-sm mx-1 btn-primary">Login</a>
+      <a href="{% url 'accounts:register' %}" class="btn btn-sm mx-1 btn-primary">Register</a>
+  </div>
+
+  {% endif %}
   
 </div>
   

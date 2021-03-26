@@ -7,16 +7,15 @@ from .managers import UserManager
 class User(AbstractBaseUser):
     
     email = models.EmailField(max_length=200, unique=True)
-    is_staff = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
     user_type = models.CharField(
         max_length=3,
         choices=[
             ('BZ', 'Business'),
             ('IN', 'Influencer'),
-            ('ADM', 'Admin')
         ],
-        default='IN',
-    )
+        blank=False,
+    )   
     
     created_at = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
@@ -36,11 +35,8 @@ class User(AbstractBaseUser):
     
     @property
     def is_staff(self):
-        if self.user_type == 'ADM':
-            return True
-        else:
-            return False
-        
+        return self.is_admin
+
     @property
     def is_business(self):
         if self.user_type == 'BZ':
