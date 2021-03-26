@@ -1,8 +1,8 @@
-# Eenflux
+# eenflux
 
-### Influencer marketing platform
+### influencer marketing platform
 
-Basic make usage:
+quick start:
 ```bash
 # runs makemigrations and migrate commands on the local database
 make update-db
