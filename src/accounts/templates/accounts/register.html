@@ -1,0 +1,20 @@
+{% extends 'website/base.html' %}
+
+
+{% block content %}
+
+<h1>Register</h1>
+
+<form action="{% url 'accounts:register' %}" method="post">
+
+  {% csrf_token %}
+  <p>email: {{ form.email }}</p>
+  <p>password: {{ form.password1 }}</p>
+  <p>password confirmation: {{ form.password2 }}</p>
+  <p>user type: {{ form.user_type }}</p>
+  <input type="submit" value="Register">
+  
+</form>
+  
+{% endblock content %}
+  

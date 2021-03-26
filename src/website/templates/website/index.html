@@ -1,0 +1,28 @@
+{% extends 'website/base.html' %}
+
+
+{% block content %}
+
+<h1>Index page</h1>
+<p>This is the index page.</p>
+
+{% if user.is_authenticated %}
+
+<p>
+  You're logged in as {{ user.email }}
+</p>
+
+<form action="{% url 'accounts:logout' %}" method="post">
+  {% csrf_token %}
+  <input class="btn btn-sm btn-primary" type="submit" value="Logout">
+</form>
+
+{% else %}
+  
+<a href="{% url 'accounts:login' %}" class="btn btn-sm btn-primary">Login</a>
+
+{% endif %}
+  
+  
+{% endblock content %}
+  
