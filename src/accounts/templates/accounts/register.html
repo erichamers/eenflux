@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<h1>Register</h1>
+<h1 class="mb-4">Register</h1>
 
 <form action="{% url 'accounts:register' %}" method="post">
 
@@ -12,7 +12,7 @@
   <p>password: {{ form.password1 }}</p>
   <p>password confirmation: {{ form.password2 }}</p>
   <p>user type: {{ form.user_type }}</p>
-  <input type="submit" value="Register">
+  <input class="btn btn-sm btn-primary" type="submit" value="Register">
   
 </form>
   

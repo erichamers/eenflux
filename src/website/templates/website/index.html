@@ -9,7 +9,7 @@
 {% if user.is_authenticated %}
 
 <p>
-  You're logged in as {{ user.email }}
+  You're logged in as {{ user.get_username }}
 </p>
 
 <form action="{% url 'accounts:logout' %}" method="post">
@@ -18,11 +18,30 @@
 </form>
 
 {% else %}
-  
+
 <a href="{% url 'accounts:login' %}" class="btn btn-sm btn-primary">Login</a>
+<a href="{% url 'accounts:register' %}" class="btn btn-sm btn-primary">Register</a>
 
 {% endif %}
+
+
+{% if user.is_business %}
+
+<a href="{% url 'website:new-campaign' %}" class="btn btn-sm btn-primary my-2">Create Campaign</a>  
+
+{% endif %}
+
+<div class="campaigns my-5">
+
+  {% for campaign in campaigns %}
+    <div class="campaign my-2">
+      <p><strong>Title:</strong> {{ campaign.title }}</p>
+      <p><strong>Description:</strong> {{ campaign.description }}</p>
+      <p><strong>Budget:</strong> {{ campaign.budget }}</p>
+    </div>
+  {% endfor %}  
   
+</div>
   
 {% endblock content %}
   

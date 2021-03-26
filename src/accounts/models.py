@@ -40,6 +40,13 @@ class User(AbstractBaseUser):
             return True
         else:
             return False
+        
+    @property
+    def is_business(self):
+        if self.user_type == 'BZ':
+            return True
+        else:
+            return False
     
     
 class Business(models.Model):

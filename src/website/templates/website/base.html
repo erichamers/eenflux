@@ -10,11 +10,23 @@
     body {
       background-color: #add8e6;
     }
+    a {
+      text-decoration: none;
+      color:#212529;
+    }
+    a:hover {
+      color: #212529;
+    }
   </style>
   <body>
     
     <div class="container mt-5 w-50 bg-white rounded shadow p-5">
-      
+    
+      <div class="title mb-4">
+
+        <a href="{% url 'website:index' %}" class="h5">Eenflux</a>
+
+      </div>
       {% block content %}
         
       {% endblock content %}
