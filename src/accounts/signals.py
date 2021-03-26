@@ -5,7 +5,6 @@ from .models import User, Influencer, Business
 
 @receiver(post_save, sender=User)
 def create_user_model_signal(sender, instance, created, **kwargs):
-    print('creating relationship')
     if created:
         if instance.user_type == 'IN':
             Influencer.objects.create(user=instance)
@@ -14,10 +13,8 @@ def create_user_model_signal(sender, instance, created, **kwargs):
             
 @receiver(post_delete, sender=Influencer)
 def delete_influencer_model_signal(sender, instance, using, **kwargs):
-    print('Deleting influencer object')
-    User.objects.delete(user=instance)
-    
+    instance.user.delete()            
+
 @receiver(post_delete, sender=Business)
-def delete_influencer_model_signal(sender, instance, using, **kwargs):
-    User.objects.delete(user=instance)
-            
+def delete_business_model_signal(sender, instance, using, **kwargs):
+    instance.user.delete()

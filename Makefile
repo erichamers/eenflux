@@ -5,3 +5,6 @@ clean-db:
 
 update-db:
 	@python ./src/manage.py makemigrations && python ./src/manage.py migrate
+
+run:
+	@python ./src/manage.py runserver
