@@ -28,6 +28,22 @@
 
   {% endif %}
   
+  <div class="campaigns mt-5">
+
+    <h2 class="mb-3">Campaigns</h2>
+    
+    {% for campaign in campaigns %}
+      <div class="campaign my-5">
+        <p>Title: {{ campaign.title }}</p>
+        <p>Description: {{ campaign.description }}</p>
+        <p>Creator: {{ campaign.business }}</p>
+        <p>Budget: {{ campaign.budget }}</p>
+        <a href="{% url 'website:apply' campaign.id %}" class="btn btn-sm btn-primary">Apply</a>
+      </div>
+    {% endfor %}
+</div>
+    
+  
 </div>
   
 {% endblock content %}

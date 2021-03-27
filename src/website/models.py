@@ -16,7 +16,7 @@ class Campaign(models.Model):
         return self.title
     
     
-class CampaignApplications(models.Model):
+class Application(models.Model):
     
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     influencer = models.ForeignKey(Influencer, on_delete=models.CASCADE)
@@ -25,5 +25,5 @@ class CampaignApplications(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.influencer.email + ' ' + self.campaign.title
+        return self.influencer.user.email + ' ' + self.campaign.title
         

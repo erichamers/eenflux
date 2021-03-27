@@ -1,0 +1,20 @@
+{% extends 'website/base.html' %}
+
+{% load widget_tweaks %}
+
+
+{% block content %}
+  
+  <div class="w-50 mx-auto">
+    <h1>Apply</h1>
+    <p>You are applying to the following campaign:</p>
+    <h4>{{ campaign }}</h4>
+    <form action="{% url 'website:apply' campaign.id %}" method="post">
+      {% csrf_token %}
+      {% render_field form.offer class="form-control" placeholder="Place your offer" %}
+      <input class="btn btn-sm btn-primary my-2" type="submit" value="Submit">
+    </form>
+  </div>
+
+{% endblock content %}
+  

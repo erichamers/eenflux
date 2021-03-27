@@ -4,7 +4,7 @@ clean-db:
 	rm -rf src/db.sqlite3
 
 update-db:
-	@python ./src/manage.py makemigrations && python ./src/manage.py migrate
+	@venv/bin/python3.9 ./src/manage.py makemigrations && venv/bin/python3.9 ./src/manage.py migrate
 
 run:
-	@python ./src/manage.py runserver
+	@venv/bin/python3.9 ./src/manage.py runserver
