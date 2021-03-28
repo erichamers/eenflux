@@ -9,23 +9,26 @@ from .models import Campaign, Application
 
 
 class IndexView(ListView):
+    
     template_name = 'website/index.html'
     model = Campaign
     context_object_name = 'campaigns'
 
 class CreateCampaignView(CreateView):
+    
     template_name = 'website/business/create_campaign.html'
     form_class = CreateCampaignForm
     
-    def get_success_url(self):
-        return reverse('website:index')
-
     def form_valid(self, form):
         form.instance.business = self.request.user.business
         return super().form_valid(form)
     
+    def get_success_url(self):
+        return reverse('website:index')
+    
 
 class ApplicationView(CreateView):
+    
     template_name = 'website/apply.html'
     form_class = ApplicationForm
     
@@ -35,10 +38,10 @@ class ApplicationView(CreateView):
         context['campaign'] = campaign
         return context
     
-    def get_success_url(self):
-        return reverse('website:index')
-
     def form_valid(self, form):
         form.instance.campaign_id = self.get_context_data()['campaign'].id
         form.instance.influencer_id = self.request.user.influencer.id
-        return super().form_valid(form)        
+        return super().form_valid(form)  
+          
+    def get_success_url(self):
+        return reverse('website:index')

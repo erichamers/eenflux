@@ -14,4 +14,4 @@ class ApplicationForm(forms.ModelForm):
     
     class Meta:
         model = Application
-        fields = ('offer',)
+        fields = ('offer', 'terms')

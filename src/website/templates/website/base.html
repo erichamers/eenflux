@@ -12,24 +12,40 @@
     }
     a {
       text-decoration: none;
-      color:#212529;
-    }
-    a:hover {
-      color: #212529;
     }
   </style>
   <body>
-    
-    <div class="container my-5 w-50 bg-white rounded shadow p-5">
-    
-      <div class="title mb-4">
-
-        <a href="{% url 'website:index' %}" class="h5">Eenflux</a>
-
-      </div>
-      {% block content %}
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container">
+        <a href="{% url 'website:index' %}" class="navbar-brand">Eenflux</a>
         
-      {% endblock content %}
+        {% if user.is_authenticated %}
+
+        <div class="left-side">
+          <span class="navbar-text text-light mx-1">
+            {{ user }}
+          </span>
+          <a class="text-white-50 mx-1" href="{% url 'accounts:logout' %}">Logout</a>
+        </div>
+
+        {% else %}
+
+        <div class="left-side">
+          <a class="text-white-50 mx-2" href="{% url 'accounts:login' %}">Login</a>
+          <a class="text-white-50 mx-2" href="{% url 'accounts:register' %}">Register</a>
+        </div>
+          
+        {% endif %}
+          
+      </div>
+    </nav>
+    <div class="container my-5 w-75 bg-white rounded shadow p-5">
+    
+      <div class="w-75 mx-auto">
+        {% block content %}
+          
+        {% endblock content %}
+      </div>
       
     </div>
 

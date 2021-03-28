@@ -43,6 +43,13 @@ class User(AbstractBaseUser):
             return True
         else:
             return False
+        
+    @property
+    def is_influencer(self):
+        if self.user_type == 'IN':
+            return True
+        else:
+            return False
     
     
 class Business(models.Model):

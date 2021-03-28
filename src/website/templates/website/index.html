@@ -3,48 +3,35 @@
 
 {% block content %}
 
-<div class="w-50 mx-auto">
-  <h1>Index page</h1>
-  <p>This is the index page.</p>
-
-  {% if user.is_authenticated %}
-
-  <p>
-    You're logged in as {{ user.get_username }}
-  </p>
-
+  
   {% if user.is_business %}
-    <div class="d-flex flex-row justify-content-center">
-      <a href="{% url 'website:new-campaign' %}" class="btn btn-sm mx-1 btn-primary">Create Campaign</a>  
-  {% endif %}
-      <a href="{% url 'accounts:logout' %}" class="btn btn-sm mx-1 btn-primary">Logout</a>
-    </div>
-  {% else %}
-
-  <div class="d-flex flex-row justify-content-center">
-      <a href="{% url 'accounts:login' %}" class="btn btn-sm mx-1 btn-primary">Login</a>
-      <a href="{% url 'accounts:register' %}" class="btn btn-sm mx-1 btn-primary">Register</a>
+  <div class="row">
+    <a href="{% url 'website:create-campaign' %}" class="text-primary">Create Campaign</a>
   </div>
-
   {% endif %}
-  
-  <div class="campaigns mt-5">
-
-    <h2 class="mb-3">Campaigns</h2>
     
+  <div class="row mt-4 mb-3">
+    <h1 class="mb-3">Campaigns</h1>
+    <p class="lead">Ongoing campaigns</p>
+  </div>
+  <div class="row justify-content-center">
     {% for campaign in campaigns %}
-      <div class="campaign my-5">
-        <p>Title: {{ campaign.title }}</p>
-        <p>Description: {{ campaign.description }}</p>
-        <p>Creator: {{ campaign.business }}</p>
-        <p>Budget: {{ campaign.budget }}</p>
-        <a href="{% url 'website:apply' campaign.id %}" class="btn btn-sm btn-primary">Apply</a>
+    <div class="card m-1" style="width: 18rem;">
+      <div class="d-flex flex-column card-body ">
+        <div class="campaign-title" style="height: 4rem;">
+          <a href="{% url 'website:apply' campaign.id %}" class="h5 card-title text-dark">{{ campaign.title }}</a>
+        </div>
+        <h6 class="card-subtitle mb-2 text-muted">{{ campaign.business.first_name }}</h6>
+        <p class="card-text mb-5">{{ campaign.description }}</p>
+        
+        {% if user.is_influencer %}
+        <a class="mx-auto w-50 btn btn-sm btn-primary mt-auto" href="{% url 'website:apply' campaign.id %}">Apply</a>
+        {% endif %}
+          
       </div>
+    </div>
     {% endfor %}
-</div>
+  </div>
     
-  
-</div>
-  
 {% endblock content %}
   

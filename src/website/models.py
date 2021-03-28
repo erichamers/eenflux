@@ -20,7 +20,10 @@ class Application(models.Model):
     
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     influencer = models.ForeignKey(Influencer, on_delete=models.CASCADE)
+    terms = models.TextField(null=True)
     offer = models.FloatField()
+    accepted = models.BooleanField(default=False)
+    rejected = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 

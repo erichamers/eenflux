@@ -8,7 +8,7 @@
 
   <h1>Create New Campaign</h1>
 
-  <form action="{% url 'website:new-campaign' %}" method="post">
+  <form action="{% url 'website:create-campaign' %}" method="post">
 
     {% csrf_token %}
     <div class="form-group my-4">
