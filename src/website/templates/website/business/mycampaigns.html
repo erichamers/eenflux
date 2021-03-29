@@ -1,0 +1,57 @@
+{% extends 'website/base_website/base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+  
+<div class="card shadow mb-4 w-75 mx-auto ">
+  <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Minhas Campanhas</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Titulo</th>
+            <th>Orcamento</th>
+            <th>Em andamento</th>
+            <th>Data de Criacao</th>
+            <th>Excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {% for campaign in campaigns %}
+            
+          <tr>
+            <td><a href="/" style="text-decoration: none; color:#858796;">{{ campaign.title }}</a></td>
+            {% get_current_language as LANGUAGE_CODE %}
+
+            {% language 'pt-br' %}
+                {% get_current_language as LANGUAGE_CODE %}
+                <td>R$ {{ campaign.budget|floatformat:2 }}</td>
+            {% endlanguage %}
+            <td>
+              
+              {% if campaign.is_active %}
+                Sim
+              {% else %}
+                Nao
+              {% endif %}
+
+            </td>
+            <td>{{ campaign.created_at }}</td>
+            <td class="text-center"><a href="{% url 'website:delete' campaign.id %}" style="color:#858796;" class="fa-sm fas fa-trash"></a></td>
+          </tr>
+
+          {% endfor %}
+            
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+  
+{% endblock content %}
+  

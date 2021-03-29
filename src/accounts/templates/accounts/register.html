@@ -1,37 +1,80 @@
-{% extends 'website/base.html' %}
-
 {% load widget_tweaks %}
+{% load static %}
 
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
+<head>
 
-<div class="w-50 mx-auto my-5">
-  <h1 class="mb-4">Register</h1>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <form action="{% url 'accounts:register' %}" method="post">
+    <title>Eenflux - Cadastro</title>
 
-    {% csrf_token %}
-    <div class="form-group my-4">
-      <label for="id_email">Email</label>
-      {% render_field form.email class="form-control" placeholder="Enter your email" %}
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Crie sua Conta!</h1>
+                            </div>
+                            <form action="{% url 'accounts:register' %}" method="post" class="user">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                  {% render_field form.email class="form-control form-control-user" placeholder="Seu email" %}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        {% render_field form.password1 class="form-control form-control-user" placeholder="Senha" %}
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        {% render_field form.password2 class="form-control form-control-user" placeholder="Confirme sua senha"%}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                  {% render_field form.user_type class="form-control form-control-select" style="border-radius: 10rem; padding: 1.5rem -1.0rem;" %} 
+                                </div>
+                                
+                                <input class="btn btn-sm btn-primary" type="submit" value="Register">
+                                
+                              </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="{% url 'accounts:login' %}">Já tem uma conta? Login!</a>
+                            </div>
+                            
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="form-group my-4">
-      <label for="id_email">Password:</label>
-      {% render_field form.password1 class="form-control" placeholder="Enter a strong password" %}
-    </div>
-    <div class="form-group my-4">
-      <label for="id_email">Confirm your password:</label>
-      {% render_field form.password2 class="form-control" placeholder="Re-enter your password" %} 
-    </div>
-    <div class="form-group my-4">
-      <label for="id_email">Select your user type:</label>
-      {% render_field form.user_type class="form-control" placeholder="User type" %} 
-    </div>
-    
-    <input class="btn btn-sm btn-primary" type="submit" value="Register">
-    
-  </form>
-</div>
-  
-{% endblock content %}
-  
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+</body>
+
+</html>

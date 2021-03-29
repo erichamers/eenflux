@@ -9,11 +9,16 @@ class Campaign(models.Model):
     description = models.TextField()
     budget = models.FloatField()
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
+    ongoing = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return self.title
+
+    @property
+    def is_active(self):
+        return self.ongoing
     
     
 class Application(models.Model):
