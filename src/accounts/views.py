@@ -33,10 +33,7 @@ class UserLoginView(LoginView):
     template_name = 'accounts/login.html'
 
     def get_success_url(self) -> str:
-        if self.request.user.user_type == 'BZ':
-            return reverse('website:mycampaigns', kwargs={'pk': self.request.user.id})
-        else:
-            return reverse('website:mycampaigns', kwargs={'pk': self.request.user.id})
+        return reverse('website:mycampaigns')
     
     def get(self, request, *args, **kwargs):
         """

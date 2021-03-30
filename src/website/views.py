@@ -1,5 +1,5 @@
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, DeleteView
@@ -14,7 +14,7 @@ class IndexView(LoginView):
 
 class CreateCampaignView(LoginRequiredMixin, CreateView):
     
-    template_name = 'website/create_campaign.html'
+    template_name = 'website/business/create_campaign.html'
     form_class = CreateCampaignForm
     
     def form_valid(self, form):
@@ -54,8 +54,21 @@ class MyCampaignsView(ListView):
     def get_queryset(self):
         return self.model.objects.filter(business_id=self.request.user.business.id)
     
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        total_active = self.model.objects.filter(business_id=self.request.user.business.id, ongoing=True).count()
+        total_finished = self.model.objects.filter(business_id=self.request.user.business.id, ongoing=False).count()
+        context['active_count'] = total_active
+        context['finished_count'] = total_finished
+        return context
+    
 
 class DeleteCampaignView(DeleteView):
     model = Campaign
     success_url = reverse_lazy('website:mycampaigns')
     template_name = 'website/business/campaign_confirm_delete.html'
+
+
+class CampaignDetailsView(DetailView):
+    template_name = 'website/campaign_details.html'
+    queryset = Campaign.objects.all()
