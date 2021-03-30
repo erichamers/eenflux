@@ -1,7 +1,7 @@
 from django.db import models
 
-from accounts.models import Business, Influencer
-
+from businesses.models import Business
+from influencers.models import Influencer
 
 class Campaign(models.Model):
 
@@ -10,6 +10,7 @@ class Campaign(models.Model):
     budget = models.FloatField()
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
     ongoing = models.BooleanField(default=True)
+    deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     
@@ -20,7 +21,10 @@ class Campaign(models.Model):
     def is_active(self):
         return self.ongoing
     
+    def finish_campaign(self):
+        self.ongoing = False
     
+
 class Application(models.Model):
     
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
@@ -34,4 +38,3 @@ class Application(models.Model):
 
     def __str__(self):
         return self.influencer.user.email + ' ' + self.campaign.title
-        

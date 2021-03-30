@@ -1,8 +1,6 @@
-from django.shortcuts import redirect
-from django.shortcuts import redirect, render
-from django.urls import reverse
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
+from django.shortcuts import redirect
+from django.urls import reverse
 from django.views.generic.edit import CreateView
 
 from .forms import CreateUserForm
@@ -32,13 +30,19 @@ class RegisterView(CreateView):
 class UserLoginView(LoginView):
     template_name = 'accounts/login.html'
 
-    def get_success_url(self) -> str:
-        return reverse('website:mycampaigns')
+    def get_success_url(self):
+        if self.request.user.user_type == 'BZ':
+            return reverse('businesses:mycampaigns')
+        else:
+            return reverse('influencers:my-campaigns')
     
     def get(self, request, *args, **kwargs):
         """
         Redirects to index page is user is already logged in
         """
         if request.user.is_authenticated:
-            return redirect('/')
+            if request.user.user_type == 'BZ':
+                return redirect('/businesses/mycampaigns')
+            if request.user.user_type == 'IN':
+                return redirect('/influencers/mycampaigns')
         return super().get(request)

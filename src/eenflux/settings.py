@@ -25,6 +25,9 @@ STATICFILES_DIRS = [
 
 INSTALLED_APPS = [
     'widget_tweaks',
+    'influencers.apps.InfluencersConfig',
+    'campaigns.apps.CampaignsConfig',
+    'businesses.apps.BusinessesConfig',
     'accounts.apps.AccountsConfig',
     'website.apps.WebsiteConfig',
     'django.contrib.admin',

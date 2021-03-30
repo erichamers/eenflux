@@ -19,17 +19,17 @@
         
         {% if user.is_business %}  
           
-          {% include 'website/business/sidebar.html' %}
+          {% include 'businesses/sidebar.html' %}
 
         {% else %}
 
-          {% include 'website/influencer/sidebar.html' %}
+          {% include 'influencers/sidebar.html' %}
 
         {% endif %}
           
         <div id="content-wrapper" class="d-flex flex-column">
           
-          {% include 'website/base_website/topbar.html' %}
+          {% include 'website/topbar.html' %}
 
           {% block content %}
           

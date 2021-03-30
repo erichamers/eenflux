@@ -1,7 +1,9 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete
 
-from .models import User, Influencer, Business
+from businesses.models import Business
+from influencers.models import Influencer
+from .models import User
 
 @receiver(post_save, sender=User)
 def create_user_model_signal(sender, instance, created, **kwargs):

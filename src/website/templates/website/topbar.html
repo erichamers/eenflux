@@ -23,7 +23,17 @@
                 
                 {% if user.is_authenticated %}
                     
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user }}</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                    
+                    {% if user.business.first_name %}
+                        {{ user.business.first_name }} {{ user.business.last_name }} 
+                    {% elif user.influencer.first_name %}
+                        {{ user.influencer.first_name }}
+                    {% else %}
+                        {{ user }}
+                    {% endif %}
+                        
+                </span>
                 <img class="img-profile rounded-circle"
                     src="{% static 'img/undraw_profile.svg' %}">
 

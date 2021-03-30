@@ -1,15 +1,16 @@
 from django import forms
 
-from .models import Campaign, Application
+from campaigns.models import Campaign, Application
 
-
-class CreateCampaignForm(forms.ModelForm):
+class CampaignForm(forms.ModelForm):
+    
+    description = forms.CharField(strip=False, widget=forms.Textarea)
     
     class Meta:
         model = Campaign
         fields = ('title', 'description', 'budget')
-
-
+        
+        
 class ApplicationForm(forms.ModelForm):
     
     class Meta:
