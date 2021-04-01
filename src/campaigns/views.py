@@ -13,6 +13,11 @@ class CampaignDetailsView(LoginRequiredMixin, UpdateView):
     fields = ('ongoing',)   
     model = Campaign
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['applications'] = Application.objects.filter(campaign_id=context.get('campaign').id)
+        return context
+    
     def get_success_url(self):
         return reverse('website:index')
     
