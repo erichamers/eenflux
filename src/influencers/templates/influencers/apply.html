@@ -1,0 +1,28 @@
+{% extends 'website/base.html' %}
+
+{% load widget_tweaks %}
+
+
+{% block page_title %}
+
+<h3>Aplicar</h3>
+  
+{% endblock page_title %}
+
+{% block content %}
+<div class="w-50 mx-auto my-5">
+  <form action="{% url 'influencers:apply' campaign.id %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="terms_id">Proposta:</label>
+      {% render_field form.terms class="form-control my-3" id="terms_id" %}
+    </div>
+    <div class="form-group">
+      <label for="offer_id">Valor:</label>
+      {% render_field form.offer class="form-control my-3" id="offer_id" %}
+    </div>
+    <input type="submit" class="btn btn-sm btn-primary my-3" value="Enviar">
+  </form>
+</div>  
+
+{% endblock content %}

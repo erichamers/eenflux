@@ -2,68 +2,20 @@
 
 {% load i18n %}
 
+{% block page_title %}
+  <h3>Minhas Campanhas</h3>
+{% endblock page_title %}
+
 {% block content %}
   
 <div class="wrapper w-75 mx-auto">
 
-  <div class="d-flex flex-row justify-content-around">
-    <div class="col-xl-4 col-md-6 mb-4">
-      <div class="card border-left-primary shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-              Em Andamento</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ active_count }}</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xl-4 col-md-6 mb-4">
-      <div class="card border-left-secondary shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-              Finalizadas</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ finished_count }}</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-briefcase fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xl-4 col-md-6 mb-4">
-      <div class="card border-left-success shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-              Propostas em aberto</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">14</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-star fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  {% include 'businesses/cards.html' %}
 
   <div class="card shadow mb-4">
     
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Minhas Campanhas</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Campanhas</h6>
     </div>
     
     <div class="card-body">
@@ -73,8 +25,9 @@
             <tr>
               <th>Titulo</th>
               <th>Orcamento</th>
-              <th>Em andamento</th>
+              <th>Status Campanha</th>
               <th>Data de Criacao</th>
+              <th>Propostas</th>
               <th>Excluir</th>
             </tr>
           </thead>
@@ -89,14 +42,26 @@
                 <td>R$ {{ campaign.budget|floatformat:2 }}</td>
               <td>
                 {% if campaign.is_active %}
-                  Sim
+                  Ativa
                 {% else %}
-                  Nao
+                  Finalizada
                 {% endif %}
               </td>
               <td>{{ campaign.created_at }}</td>
+              <td>
+                {% for k, v in campaigns_data.items %}
+                  
+                  {% if k == campaign.title %}
+                    {{ v }}
+                  {% endif %}
+                    
+                {% endfor %}
+              </td>
               <td class="text-center"><a href="{% url 'businesses:delete' campaign.id %}" style="color:#858796;" class="fa-sm fas fa-trash"></a></td>
             </tr>
+
+            
+              
 
             {% endfor %}
               

@@ -1,0 +1,75 @@
+{% extends 'website/base.html' %}
+
+{% load i18n %}
+
+{% block page_title %}
+  <h3>Minhas Propostas</h3>
+{% endblock page_title %}
+  
+
+{% block content %}
+  
+<div class="wrapper w-75 mx-auto">
+
+  {% include 'influencers/cards.html' %}
+
+  <div class="card shadow mb-4">
+    
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Minhas Propostas</h6>
+    </div>
+    
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Campanha</th>
+              <th>Proposta</th>
+              <th>Status Campanha</th>
+              <th>Empresa</th>
+              <th>Status Proposta</th>
+              <th>Retirar</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            {% for application in applications %}
+              
+            <tr>
+              <td>
+                <a href="{% url 'campaigns:campaign-details' application.campaign.id %}" style="text-decoration: none; color:#858796;">{{ application.campaign.title }}</a>
+              </td>
+                <td>R$ {{ application.offer|floatformat:2 }}</td>
+              <td>
+                {% if application.is_active %}
+                  Am andamento
+                {% else %}
+                  Concluida
+                {% endif %}
+              </td>
+              <td>{{ application.campaign.business.first_name }} {{ application.campaign.business.last_name }} </td>
+              
+              {% if not application.been_rejected and not application.been_accepted %}
+                <td class="text-center"><i style="color:#858796;" class="fas fa-minus text-dark"></i></td>
+              {% elif application.been_accepted %}
+                <td class="text-center"><i style="color:#858796;" class="fas fa-check text-success"></i></td>
+              {% else %}
+                <td class="text-center"><a href="" style="color:#858796;" class="fas fa-times text-danger"></a></td>
+              {% endif %}
+
+              <td class="text-center"><a href="" style="color:#858796;" class="fa-sm fas fa-trash"></a></td>
+
+            </tr>
+
+            {% endfor %}
+              
+          </tbody>
+        </table>
+      </div>
+    </div>
+      
+  </div>
+</div>
+{% endblock content %}
+  

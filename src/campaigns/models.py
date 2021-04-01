@@ -5,7 +5,7 @@ from influencers.models import Influencer
 
 class Campaign(models.Model):
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=30)
     description = models.TextField()
     budget = models.FloatField()
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
@@ -13,6 +13,9 @@ class Campaign(models.Model):
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
     
     def __str__(self):
         return self.title
@@ -35,6 +38,17 @@ class Application(models.Model):
     rejected = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.influencer.user.email + ' ' + self.campaign.title
+    
+    @property
+    def been_accepted(self):
+        return self.accepted
+    
+    @property
+    def been_rejected(self):
+        return self.rejected

@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'businesses.apps.BusinessesConfig',
     'accounts.apps.AccountsConfig',
     'website.apps.WebsiteConfig',
+    'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -34,7 +34,7 @@ class UserLoginView(LoginView):
         if self.request.user.user_type == 'BZ':
             return reverse('businesses:mycampaigns')
         else:
-            return reverse('influencers:my-campaigns')
+            return reverse('influencers:my-proposals')
     
     def get(self, request, *args, **kwargs):
         """
@@ -44,5 +44,5 @@ class UserLoginView(LoginView):
             if request.user.user_type == 'BZ':
                 return redirect('/businesses/mycampaigns')
             if request.user.user_type == 'IN':
-                return redirect('/influencers/mycampaigns')
+                return redirect('/influencers/my-proposals')
         return super().get(request)

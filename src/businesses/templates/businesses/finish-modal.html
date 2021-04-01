@@ -1,0 +1,23 @@
+<div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="finishModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Finalizar Campanha</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        Depois de finalizada, a campanha nao pode ser reaberta. <br>
+        Deseja finalizar?
+      </div>
+      <div class="modal-footer">
+        <form action="{% url 'campaigns:campaign-details' campaign.id %}" method="post">
+          {% csrf_token %}
+          <button type="button" class="btn btn-sm btn-success" data-dismiss="modal">Voltar</button>
+          <input type="submit" class="btn btn-sm btn-danger" value="Finalizar">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

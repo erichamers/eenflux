@@ -1,75 +1,37 @@
 {% extends 'website/base.html' %}
 
+{% load widget_tweaks %}
+
+{% block page_title %}
+  <h3>Detalhes da Campanha</h3>
+{% endblock page_title %}
 
 {% block content %}
 
-
-<div class="wrapper mb-5 w-50 mx-auto">
-  <h2>Detalhes da Campanha</h2>
-  <div class="card shadow my-3">
-    <div class="card-body">
-      <h3 class="font-weight-bold text-primary mt-3">{{ campaign.title }}</h3>
-      <p class="mt-0 lead">{{ campaign.business }}</p>
-      <p class="mt-5">{{ campaign.description|linebreaksbr }}</p>
-      <p><strong>Orcamento:</strong> R$ {{ campaign.budget|floatformat:2 }}</p>
-    </div>
-  </div>
-
-  <div class="d-flex flex-row text-left mx-auto mb-5">
-  {% if user.is_business %}
-    <button type="button" class="btn btn-sm btn-danger mx-1" data-toggle="modal" data-target="#exampleModal">
-      Finalizar
-    </button>
-  {% else %}
-    <a href="" class="btn btn-sm btn-primary">Aplicar</a>
-  {% endif %}
-    <a href="javascript:history.back()" class="btn btn-sm btn-success mx-1">Voltar</a>
-  </div>
-
-</div>
-
-<!-- <div class="d-flex flex-row text-left mx-auto mb-5">
-  <button type="button" class="btn btn-sm btn-danger mx-1" data-toggle="modal" data-target="#exampleModal">
-    Finalizar
-  </button>
--->
-
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Finalizar Campanha</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body text-center">
-          Depois de finalizada, a campanha nao pode ser reaberta. <br>
-          Deseja finalizar?
-        </div>
-        <div class="modal-footer">
-          <form action="{% url 'campaigns:campaign-details' campaign.id %}" method="post">
-            {% csrf_token %}
-            <button type="button" class="btn btn-sm btn-success" data-dismiss="modal">Voltar</button>
-            <input type="submit" class="btn btn-sm btn-danger" value="Finalizar">
-          </form>
-        </div>
+  <div class="wrapper mb-5 w-50 mx-auto">
+    <div class="card shadow my-3">
+      <div class="card-body">
+        <h3 class="font-weight-bold text-primary mt-3">{{ campaign.title }}</h3>
+        <p class="mt-0 lead">{{ campaign.business }}</p>
+        <p class="mt-5">{{ campaign.description|linebreaksbr }}</p>
+        <p><strong>Orcamento:</strong> R$ {{ campaign.budget|floatformat:2 }}</p>
       </div>
     </div>
-  </div>
-</div> 
 
-<!-- <div class="d-flex flex-row text-left mx-auto mb-5">
-  {% if user.is_business %}
-  <form action="{% url 'campaigns:campaign-details' campaign.id %}" method="post">
-    {% csrf_token %}
-    <input class="btn btn-sm btn-danger mx-1" type="submit" value="Finalizar">
-  </form>
-  {% else %}
-    <a href="" class="btn btn-sm btn-primary">Aplicar</a>
-  {% endif %}
-    <a href="javascript:history.back()" class="btn btn-sm btn-success mx-1">Voltar</a>
-  </div> -->
-  
+    <div class="d-flex flex-row text-left mx-auto mb-5">
+    {% if user.is_business %}
+      <button type="button" class="btn btn-sm btn-danger mx-1" data-toggle="modal" data-target="#finishModal">
+        Finalizar
+      </button>
+    {% elif not user.is_business %}
+      <a href="{% url 'influencers:apply' campaign.id %}" class="btn btn-sm btn-primary">Aplicar</a>
+    {% endif %}
+      <a href="javascript:history.back()" class="btn btn-sm btn-success mx-1">Voltar</a>
+    </div>
+
+  </div>
+
+  {% include 'businesses/finish-modal.html' %}
+
 {% endblock content %}
   

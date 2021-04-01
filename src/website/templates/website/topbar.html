@@ -9,7 +9,10 @@
 
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mx-4">
-            <h1 class="h3 mb-0 text-gray-800">{{ user.user_type }} Dashboard</h1>
+            <h1 class="h3 mb-0 text-gray-800">
+            {% block page_title %}
+            {% endblock page_title %}
+            </h1>
         </div>
     </div>
     <!-- Topbar Navbar -->
