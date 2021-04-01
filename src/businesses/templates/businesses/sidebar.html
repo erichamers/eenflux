@@ -10,7 +10,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">{{ user.user_type }}</div>
+        <div class="sidebar-brand-text mx-3">Eenflux</div>
     </a>
 
     <!-- Divider -->
@@ -37,7 +37,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{% url 'businesses:mycampaigns' %}">Minhas Campanhas</a>
                 <a class="collapse-item" href="{% url 'businesses:create-campaign' %}">Criar Campanha</a>
-                <a class="collapse-item" href="cards.html">Pesquisar</a>
+                <a class="collapse-item" href="{% url 'campaigns:campaigns' %}">Pesquisar</a>
             </div>
         </div>
     </li>

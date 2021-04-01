@@ -21,7 +21,10 @@
       <label for="offer_id">Valor:</label>
       {% render_field form.offer class="form-control my-3" id="offer_id" %}
     </div>
-    <input type="submit" class="btn btn-sm btn-primary my-3" value="Enviar">
+    <div class="d-flex flex-row text-left mx-auto my-3">
+      <input type="submit" class="btn btn-sm btn-primary" value="Enviar">
+      <a href="javascript:history.back()" class="btn btn-sm btn-success mx-1">Voltar</a>
+    </div>
   </form>
 </div>  
 

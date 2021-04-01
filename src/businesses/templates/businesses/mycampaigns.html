@@ -57,7 +57,13 @@
                     
                 {% endfor %}
               </td>
+              
+              {% if campaign.is_active %}
               <td class="text-center"><a href="{% url 'businesses:delete' campaign.id %}" style="color:#858796;" class="fa-sm fas fa-trash"></a></td>
+              {% else %}
+              <td class="text-center" style="color:#d3d3d3;"><i class="fa-sm fas fa-trash" disabled></i></td>
+              {% endif %}
+                
             </tr>
 
             

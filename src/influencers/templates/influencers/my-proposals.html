@@ -38,7 +38,7 @@
               
             <tr>
               <td>
-                <a href="{% url 'campaigns:campaign-details' application.campaign.id %}" style="text-decoration: none; color:#858796;">{{ application.campaign.title }}</a>
+                <a href="{% url 'influencers:application-details' application.id %}" style="text-decoration: none; color:#858796;">{{ application.campaign.title }}</a>
               </td>
                 <td>R$ {{ application.offer|floatformat:2 }}</td>
               <td>

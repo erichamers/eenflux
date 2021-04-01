@@ -20,9 +20,18 @@
 
     <div class="d-flex flex-row text-left mx-auto mb-5">
     {% if user.is_business %}
-      <button type="button" class="btn btn-sm btn-danger mx-1" data-toggle="modal" data-target="#finishModal">
-        Finalizar
-      </button>
+      
+      
+      {% if not campaign.is_active %}
+        <button type="button" class="btn btn-sm btn-danger mx-1" data-toggle="modal" data-target="#finishModal" disabled>
+          Finalizar
+        </button>
+      {% else %}
+        <button type="button" class="btn btn-sm btn-danger mx-1" data-toggle="modal" data-target="#finishModal">
+          Finalizar
+        </button>
+      {% endif %}
+        
     {% elif not user.is_business %}
       <a href="{% url 'influencers:apply' campaign.id %}" class="btn btn-sm btn-primary">Aplicar</a>
     {% endif %}

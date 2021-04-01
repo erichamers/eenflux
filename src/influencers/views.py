@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.shortcuts import render
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -42,3 +43,7 @@ class ApplicationView(LoginRequiredMixin, CreateView):
           
     def get_success_url(self):
         return reverse('website:index')
+
+class ApplicationDetailsView(DetailView):
+    template_name = 'influencers/application_details.html'
+    model = Application
